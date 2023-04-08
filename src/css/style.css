@@ -4,6 +4,12 @@ body {
     color: #ffffff;
 }
 
+/*Selection texte*/
+*::selection {
+    background-color: #00c9b6;
+}
+
+/*Texte*/
 h1 {
     text-align: center;
 }
@@ -13,7 +19,19 @@ p {
     color: #d70000;
 }
 
+/*Animation*/
+@keyframes animation {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*Table*/
 table {
+    opacity: 0;
+    transform: translateZ(100px);
+    animation: animation 1s ease forwards;
     width: 50%;
     border-collapse: collapse;
     margin: 0 auto;
@@ -33,6 +51,7 @@ tr:hover {
     background-color: #262626;
 }
 
+/*Boutons pour la pagination du classement*/
 .pagination {
     display: flex;
     justify-content: center;
@@ -55,6 +74,8 @@ tr:hover {
     background-color: #00fff7;
 }
 
+
+/*Boutons pour la page index.html*/
 .button {
     text-decoration: none;
     color: #f9f9f9;
@@ -87,14 +108,10 @@ tr:hover {
     background-color: #832f03;
 }
 
+/*Centrer les boutons*/
 .centre {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 50vh;
 }
-
-
-
-
-

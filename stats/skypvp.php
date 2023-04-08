@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="description" content="SkycraftPVP est un serveur Minecraft PVP créé en 2020.">
+    <meta name="author" content="GabzDEV">
+    <meta name="keywords" content="Minecraft, PVP, serveur, SkycraftPVP">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SKYPVP | SkycraftPVP</title>
+    <link rel="icon" type="image/x-icon" href="../src/img/icon.png">
     <link href="../src/css/style.css" rel="stylesheet">
+    <script src="../src/js/main.js"></script>
 </head>
 <body>
 <h1>Classement (skypvp)</h1>
@@ -11,20 +19,20 @@
     Nous apprécions votre aide pour rendre notre site web meilleur pour tous.
 </p>
 <?php
-require_once "../src/config/db.php";
-$mysqli = new mysqli($servername, $username, $password, $database);
+require_once "../src/config/config.php"; //Fichier config
+$mysqli = new mysqli($servername, $username, $password, $database); //Connexion à la base de données
 
-$limit = 8;
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$page = isset($_GET['page']) ? $_GET['page'] : 1; //Page
 
+//Recup joueurs bd
 $query = "SELECT COUNT(*) FROM players";
 $result = $mysqli->query($query);
 $total = $result->fetch_row()[0];
 
-$offset = ($page - 1) * $limit;
-$query = "SELECT * FROM players ORDER BY level DESC, kills DESC LIMIT $offset, $limit";
+$offset = ($page - 1) * $max; //Max VALUES (Changer dans config) ...
+$query = "SELECT * FROM players ORDER BY level DESC, kills DESC LIMIT $offset, $max"; //Recup
 
-echo '<table>';
+echo '<table class="animation" id="animation">';
 
 if ($result = $mysqli->query($query)) {
     $i = $offset + 1;
@@ -68,7 +76,7 @@ if ($result = $mysqli->query($query)) {
 }
 echo '</table>';
 
-$pages = ceil($total / $limit);
+$pages = ceil($total / $max);
 if ($pages > 1) {
     echo '<div class="pagination">';
     for ($i = 1; $i <= $pages; $i++) {
